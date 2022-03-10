@@ -6,14 +6,15 @@ import cv2
 import numpy as np
 import argparse
 
+
 def template_matching(screen, button):
     res = cv2.matchTemplate(screen, button, cv2.TM_CCOEFF_NORMED)
     minval, maxval, minloc, maxloc = cv2.minMaxLoc(res)
     if maxval > 0.7:
-        cv2.rectangle(screen, maxloc, (maxloc[0] + w, maxloc[1] + h), (0, 0, 255), -1)
         w, h = button.shape[::-1]
-        location = maxloc[0] + int(w/2), maxloc[1] + int(h/2)
+        location = maxloc[0] + int(w / 2), maxloc[1] + int(h / 2)
         return location
+
 
 def screenrecording(args):
     while True:
@@ -29,6 +30,7 @@ def screenrecording(args):
             pyautogui.click(location)
 
         time.sleep(1)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
