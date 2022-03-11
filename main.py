@@ -28,7 +28,8 @@ def screenrecording(args):
         if location:
             print(f"Found button at {location}")
             pyautogui.click(location)
-
+            pyautogui.moveTo(location[0]+200, location[1]) 
+            
         time.sleep(1)
 
 
