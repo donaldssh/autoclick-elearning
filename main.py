@@ -15,7 +15,7 @@ def template_matching(screen, button):
         return location
 
 def color_shape_approx(screen):
-    color1 = np.asarray([1, 1, 140])
+    color1 = np.asarray([0, 0, 140])
     color2 = np.asarray([10, 10, 200])
     mask = cv2.inRange(screen, color1, color2)
     cnts = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -25,7 +25,8 @@ def color_shape_approx(screen):
         if perimeter > 100:
             approx = cv2.approxPolyDP(c, 0.02 * perimeter, True)
             if len(approx) == 4:
-                return cv2.boundingRect(approx)
+                x, y, w, h = cv2.boundingRect(approx)
+                return x + int(0.75 * w), y + int(0.75 * h)
 
 def autoclicker(args):
     while True:
